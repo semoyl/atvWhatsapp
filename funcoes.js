@@ -134,7 +134,7 @@ const listaUsuarioContato = function(nomeUsuario, nomeContato){
     listaContatos.forEach(function(busca){
         busca.contacts.forEach(function(busca2){
 
-                if(busca.account == nomeUsuario && busca2.name == nomeContato){
+                if(busca.account == String(nomeUsuario).toUpperCase && busca2.name == String(nomeContato).toUpperCase){
                     status = true
                     conversas2 = {
                                     conversa: busca2.messages
@@ -153,4 +153,42 @@ const listaUsuarioContato = function(nomeUsuario, nomeContato){
 
 }
 
-console.log(listaUsuarioContato('Bernardo Xavier Ribeiro', 'José Maria da Silva'))
+const buscaMensagemEspecifica = function (numeroUsuario, nomeContato, texto){
+    let statusMensagem = {
+                            numeroTelefone: numeroUsuario,
+                            nomeUsuario: [],
+                            nomeContato: nomeContato,
+                            mensagem: []
+                        }
+
+    let status = false
+
+    listaContatos.forEach(function(busca){
+        if(busca.number == numeroUsuario){
+            busca.contacts.forEach(function(busca2){
+                if(busca2.name == (nomeContato)){
+                    busca2.messages.forEach(function(busca3){
+                        if(busca3.content.includes(texto)){
+                            status = true
+                            conversasAq = {
+                                conversa: busca3.content
+                                            }
+                            nomeUser = {
+                                            nome: busca.account
+                                        }
+                                statusMensagem.mensagem.push(conversasAq)
+                                statusMensagem.nomeUsuario.push(nomeUser)
+                        }
+                    })
+                }
+            })
+        }
+    })
+            if(status == true){
+                return statusMensagem
+                }else{
+                return status
+        }
+    }
+
+console.log(buscaMensagemEspecifica("11966578996", "José Maria da Silva", "Hello"))
