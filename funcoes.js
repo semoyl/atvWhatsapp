@@ -121,10 +121,11 @@ const listaDeConversas = function(numero){
     }
 }
 
-const listaUsuarioContato = function(nomeUsuario, nomeContato){
+const listaUsuarioContato = function(numeroUsuario, nomeContato){
 
     let conversa = {
-                        nomeUsuario: nomeUsuario,
+                        numeroUsuario: numeroUsuario,
+                        nomeUsuario: [],
                         nomeContato: nomeContato,
                         conversas: []
     }
@@ -134,7 +135,7 @@ const listaUsuarioContato = function(nomeUsuario, nomeContato){
     listaContatos.forEach(function(busca){
         busca.contacts.forEach(function(busca2){
 
-                if(busca.account == String(nomeUsuario).toUpperCase && busca2.name == String(nomeContato).toUpperCase){
+                if(busca.number == String(numeroUsuario).toUpperCase && busca2.name == String(nomeContato).toUpperCase){
                     status = true
                     conversas2 = {
                                     conversa: busca2.messages
@@ -191,4 +192,11 @@ const buscaMensagemEspecifica = function (numeroUsuario, nomeContato, texto){
         }
     }
 
-console.log(buscaMensagemEspecifica("11966578996", "José Maria da Silva", "Hello"))
+module.exports = {
+    listaContatoNumero,
+    listaInfoAlt,
+    listaDeContatos,
+    listaDeConversas,
+    listaUsuarioContato,
+    buscaMensagemEspecifica
+}
